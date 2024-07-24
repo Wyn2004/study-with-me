@@ -7,18 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.se4f7.prj301.constants.ErrorMessage;
-import com.se4f7.prj301.enums.AdsEnum;
+import com.se4f7.prj301.enums.StatusEnum;
 import com.se4f7.prj301.model.PaginationModel;
 import com.se4f7.prj301.model.request.AdsModelRequest;
 import com.se4f7.prj301.model.response.AdsModelResponse;
+
 import com.se4f7.prj301.utils.DBUtil;
 
 public class AdsRepository {
 	private static final String INSERT_SQL = "INSERT INTO ads (images, createdBy, updatedBy, width, height, position, url) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_SQL = "UPDATE ads SET images = ?, status = ?, width = ?, height = ?,position = ?,url = ?, updatedBy = ? WHERE id = ?";
+	private static final String UPDATE_SQL = "UPDATE ads SET images = ?, updatedBy = ?, width = ?, height = ?, position = ?, url = ? WHERE id = ?";
+	private static final String GET_BY_POSITION_SQL = "SELECT * FROM ads WHERE position = ? ";
 	private static final String GET_BY_ID_SQL = "SELECT * FROM ads WHERE id = ?";
-	private static final String GET_BY_POSITION_SQL = "SELECT * FROM ads WHERE position = ?";
-	private static final String DELETE_BY_ID_SQL = "DELETE FROM ads WHERE id = ?";
+	private static final String DELETE_BY_ID_SQL = "DELETE FROM ads  WHERE id= ? ";
 	private static final String SEARCH_LIST_SQL = "SELECT * FROM ads WHERE position LIKE ? LIMIT ? OFFSET ?";
 	private static final String COUNT_BY_NAME_SQL = "SELECT COUNT(id) AS totalRecord FROM ads WHERE position LIKE ?";
 
@@ -27,11 +28,11 @@ public class AdsRepository {
 		try (Connection connection = DBUtil.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL)) {
 			// Set parameters.
-			preparedStatement.setString(1, request.getImages());
+			preparedStatement.setString(1, request.getImages());;
 			preparedStatement.setString(2, username);
 			preparedStatement.setString(3, username);
-			preparedStatement.setString(4, request.getWitdh());
-			preparedStatement.setString(5, request.getHeight());
+			preparedStatement.setInt(4, request.getWidth());
+			preparedStatement.setInt(5, request.getHeight());
 			preparedStatement.setString(6, request.getPosition());
 			preparedStatement.setString(7, request.getUrl());
 			// Show SQL query.
@@ -49,15 +50,14 @@ public class AdsRepository {
 		try (Connection connection = DBUtil.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
 			// Set parameters.
-			preparedStatement.setString(1, request.getImages());
-			AdsEnum Status = AdsEnum.CHANGED;
-			preparedStatement.setString(2, Status.name());
-			preparedStatement.setString(3, request.getWitdh());
-			preparedStatement.setString(4, request.getHeight());
+			preparedStatement.setString(1, request.getImages());;
+			preparedStatement.setString(2, username);
+			preparedStatement.setInt(3, request.getWidth());
+			preparedStatement.setInt(4, request.getHeight());
 			preparedStatement.setString(5, request.getPosition());
 			preparedStatement.setString(6, request.getUrl());
-			preparedStatement.setString(7, username);
-			preparedStatement.setLong(8, id);
+			preparedStatement.setLong(7, id);
+		
 			// Show SQL query.
 			System.out.println(preparedStatement);
 			// Execute query.
@@ -84,16 +84,16 @@ public class AdsRepository {
 			AdsModelResponse response = new AdsModelResponse();
 			while (rs.next()) {
 				response.setId(rs.getLong("id"));
-				response.setPosition(rs.getString("position"));
-				response.setWitdh(rs.getString("witdh"));
-				response.setHeight(rs.getString("height"));
-				response.setUrl(rs.getString("url"));
 				response.setImages(rs.getString("images"));
-				response.setStatus(AdsEnum.valueOf(rs.getString("status")));
 				response.setCreatedDate(rs.getString("createdDate"));
 				response.setUpdatedDate(rs.getString("updatedDate"));
 				response.setCreatedBy(rs.getString("createdBy"));
 				response.setUpdatedBy(rs.getString("updatedBy"));
+				response.setWidth(rs.getInt("width"));
+				response.setHeight(rs.getInt("height"));
+				response.setPosition(rs.getString("position"));
+				response.setUrl(rs.getString("url"));
+
 			}
 			return response;
 		} catch (Exception e) {
@@ -117,16 +117,15 @@ public class AdsRepository {
 			AdsModelResponse response = new AdsModelResponse();
 			while (rs.next()) {
 				response.setId(rs.getLong("id"));
-				response.setPosition(rs.getString("position"));
-				response.setWitdh(rs.getString("witdh"));
-				response.setHeight(rs.getString("height"));
-				response.setUrl(rs.getString("url"));
 				response.setImages(rs.getString("images"));
-				response.setStatus(AdsEnum.valueOf(rs.getString("status")));
 				response.setCreatedDate(rs.getString("createdDate"));
 				response.setUpdatedDate(rs.getString("updatedDate"));
 				response.setCreatedBy(rs.getString("createdBy"));
 				response.setUpdatedBy(rs.getString("updatedBy"));
+				response.setWidth(rs.getInt("width"));
+				response.setHeight(rs.getInt("height"));
+				response.setPosition(rs.getString("position"));
+				response.setUrl(rs.getString("url"));
 			}
 			return response;
 		} catch (Exception e) {
@@ -164,20 +163,21 @@ public class AdsRepository {
 			// Execute query.
 			// Select records.
 			ResultSet rs = stmtSelect.executeQuery();
+			System.out.println(123);
 			List<AdsModelResponse> results = new ArrayList<AdsModelResponse>();
 			while (rs.next()) {
 				AdsModelResponse response = new AdsModelResponse();
 				response.setId(rs.getLong("id"));
-				response.setPosition(rs.getString("position"));
-				response.setWitdh(rs.getString("witdh"));
-				response.setHeight(rs.getString("height"));
-				response.setUrl(rs.getString("url"));
 				response.setImages(rs.getString("images"));
-				response.setStatus(AdsEnum.valueOf(rs.getString("status")));
 				response.setCreatedDate(rs.getString("createdDate"));
 				response.setUpdatedDate(rs.getString("updatedDate"));
 				response.setCreatedBy(rs.getString("createdBy"));
 				response.setUpdatedBy(rs.getString("updatedBy"));
+				response.setStatus(StatusEnum.valueOf(rs.getString("status")));
+				response.setWidth(rs.getInt("width"));
+				response.setHeight(rs.getInt("height"));
+				response.setPosition(rs.getString("position"));
+				response.setUrl(rs.getString("url"));
 				results.add(response);
 			}
 

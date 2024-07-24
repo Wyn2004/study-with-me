@@ -25,7 +25,7 @@
       </a>
     </li>
         <li class="nav-item">
-      <a href="${pageContext.request.contextPath}/page-admin/features/advertisement/index.jsp" class="sidebar-menu nav-link">
+      <a href="${pageContext.request.contextPath}/page-admin/features/ads/index.jsp" class="sidebar-menu nav-link">
         <i class="nav-icon fas fa-bullhorn"></i>
         Advertisements
       </a>

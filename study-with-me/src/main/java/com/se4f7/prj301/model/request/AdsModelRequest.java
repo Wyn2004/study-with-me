@@ -1,25 +1,23 @@
 package com.se4f7.prj301.model.request;
 
-import com.se4f7.prj301.enums.AdsEnum;
+
 
 public class AdsModelRequest {
-
 	private String images;
-	private AdsEnum status;
-	private String witdh;
-	private String height;
+	private int width;
+	private int height;
 	private String position;
 	private String url;
-
+	
 	public AdsModelRequest() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public AdsModelRequest(String images, AdsEnum status, String witdh, String height, String position, String url) {
+	public AdsModelRequest(String images, int width, int height, String position, String url) {
 		super();
 		this.images = images;
-		this.status = status;
-		this.witdh = witdh;
+		this.width = width;
 		this.height = height;
 		this.position = position;
 		this.url = url;
@@ -33,27 +31,19 @@ public class AdsModelRequest {
 		this.images = images;
 	}
 
-	public AdsEnum getStatus() {
-		return status;
+	public int getWidth() {
+		return width;
 	}
 
-	public void setStatus(AdsEnum status) {
-		this.status = status;
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
-	public String getWitdh() {
-		return witdh;
-	}
-
-	public void setWitdh(String witdh) {
-		this.witdh = witdh;
-	}
-
-	public String getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(String height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 
@@ -72,5 +62,5 @@ public class AdsModelRequest {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
+	
 }

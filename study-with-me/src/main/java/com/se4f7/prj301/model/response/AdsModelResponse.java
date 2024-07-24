@@ -1,26 +1,25 @@
 package com.se4f7.prj301.model.response;
-
-import com.se4f7.prj301.enums.AdsEnum;
+import com.se4f7.prj301.enums.StatusEnum;
 import com.se4f7.prj301.model.BaseModel;
 
 public class AdsModelResponse extends BaseModel {
-
 	private String images;
-	private AdsEnum status;
-	private String witdh;
-	private String height;
+	private StatusEnum status;
+	private int width;
+	private int height;
 	private String position;
 	private String url;
-
+	
 	public AdsModelResponse() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public AdsModelResponse(String images, AdsEnum status, String witdh, String height, String position, String url) {
+	public AdsModelResponse(String images, StatusEnum status, int width, int height, String position, String url) {
 		super();
 		this.images = images;
 		this.status = status;
-		this.witdh = witdh;
+		this.width = width;
 		this.height = height;
 		this.position = position;
 		this.url = url;
@@ -34,27 +33,27 @@ public class AdsModelResponse extends BaseModel {
 		this.images = images;
 	}
 
-	public AdsEnum getStatus() {
+	public StatusEnum getStatus() {
 		return status;
 	}
 
-	public void setStatus(AdsEnum status) {
+	public void setStatus(StatusEnum status) {
 		this.status = status;
 	}
 
-	public String getWitdh() {
-		return witdh;
+	public int getWidth() {
+		return width;
 	}
 
-	public void setWitdh(String witdh) {
-		this.witdh = witdh;
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
-	public String getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(String height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 
@@ -73,5 +72,6 @@ public class AdsModelResponse extends BaseModel {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
+	
+	
 }

@@ -142,7 +142,7 @@ $(document).ready(function() {
 		formData.append('payload', JSON.stringify(payload));
 		if (currentId) {
 			// Read detail additional function putFormData in file: /assets/http.js
-			Http.putFormData(`${domain}/admin/api/messages?id=${currentId}`, formData)
+			Http.putFormData(`${domain}/admin/api/messages?id=${currentId}`, body)
 				.then(res => {
 					if (res.success) {
 						this.switchViewMessages(true);
@@ -156,7 +156,7 @@ $(document).ready(function() {
 				});
 		} else {
 			// Read detail additional function postFormData in file: /assets/http.js
-			Http.postFormData(`${domain}/admin/api/messages`, formData)
+			Http.postFormData(`${domain}/admin/api/messages`, body)
 				.then(res => {
 					if (res.success) {
 						this.switchViewMessages(true);

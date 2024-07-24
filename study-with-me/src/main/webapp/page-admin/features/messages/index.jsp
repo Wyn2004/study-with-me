@@ -7,11 +7,6 @@
       </div>
       <div class="row p-2">
         <div class="col-6">
-          <div class="btn-group">
-            <button type="button" class="btn btn-primary btn-sm" onclick="switchViewMessages(false)">
-              <i class="fa fa-plus"></i> Create
-            </button>
-          </div>
         </div>
         <div class="col-6">
           <div class="input-group input-group-sm float-right" style="width: 250px">

@@ -13,6 +13,8 @@ import com.se4f7.prj301.constants.ErrorMessage;
 import com.se4f7.prj301.constants.QueryType;
 import com.se4f7.prj301.model.PaginationModel;
 import com.se4f7.prj301.model.request.MessagesModelRequest;
+import com.se4f7.prj301.model.request.MessagesModelRequest;
+import com.se4f7.prj301.model.response.MessagesModelResponse;
 import com.se4f7.prj301.model.response.MessagesModelResponse;
 import com.se4f7.prj301.service.MessagesService;
 import com.se4f7.prj301.service.impl.MessagesServiceImpl;
@@ -35,13 +37,8 @@ public class MessagesController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			// Get JSON payload from request.
-			// Parse JSON stringify from request to Java Class.
-			MessagesModelRequest requestBody = HttpUtil.ofFormData(req.getPart("payload"))
-					.toModel(MessagesModelRequest.class);
-			// Get username from header request.
+			MessagesModelRequest requestBody = HttpUtil.of(req.getReader()).toModel(MessagesModelRequest.class);
 			String username = req.getAttribute("username").toString();
-			// Call service create a new Messages.
 			boolean result = MessagesService.create(requestBody, username);
 			ResponseUtil.success(resp, result);
 		} catch (Exception e) {
@@ -52,13 +49,8 @@ public class MessagesController extends HttpServlet {
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			// Get JSON payload from request.
-			// Parse JSON stringify from request to Java Class.
-			MessagesModelRequest requestBody = HttpUtil.ofFormData(req.getPart("payload"))
-					.toModel(MessagesModelRequest.class);
-			// Get username from header request.
+			MessagesModelRequest requestBody = HttpUtil.of(req.getReader()).toModel(MessagesModelRequest.class);
 			String username = req.getAttribute("username").toString();
-			// Call service update Messages.
 			boolean result = MessagesService.update(req.getParameter("id"), requestBody, username);
 			ResponseUtil.success(resp, result);
 		} catch (Exception e) {
