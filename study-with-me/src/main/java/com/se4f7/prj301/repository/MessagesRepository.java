@@ -6,11 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.ssl.SSLEngineResult.Status;
-
 import com.se4f7.prj301.constants.ErrorMessage;
 import com.se4f7.prj301.enums.MessagesStatusEnum;
-import com.se4f7.prj301.enums.PostsStatusEnum;
 import com.se4f7.prj301.model.PaginationModel;
 import com.se4f7.prj301.model.request.MessagesModelRequest;
 import com.se4f7.prj301.model.response.MessagesModelResponse;
@@ -22,8 +19,8 @@ public class MessagesRepository {
 	private static final String GET_BY_ID_SQL = "SELECT * FROM messages WHERE id = ?";
 	private static final String GET_BY_NAME_SQL = "SELECT * FROM messages WHERE subject = ?";
 	private static final String DELETE_BY_ID_SQL = "DELETE FROM messages WHERE id = ?";
-	private static final String SEARCH_LIST_SQL = "SELECT * FROM messages WHERE subject LIKE ? LIMIT ? OFFSET ?";
-	private static final String COUNT_BY_NAME_SQL = "SELECT COUNT(id) AS totalRecord FROM messages WHERE subject LIKE ?";
+	private static final String SEARCH_LIST_SQL = "SELECT * FROM messages WHERE email LIKE ? LIMIT ? OFFSET ?";
+	private static final String COUNT_BY_NAME_SQL = "SELECT COUNT(id) AS totalRecord FROM messages WHERE email LIKE ?";
 
 	/// chinh user thanh email ???
 	public boolean create(MessagesModelRequest request, String username) {
@@ -146,13 +143,13 @@ public class MessagesRepository {
 		}
 	}
 
-	public PaginationModel filterBySubject(int page, int size, String subject) {
+	public PaginationModel filterByEmail(int page, int size, String email) {
 		// Open connection and set SQL query into PreparedStatement.
 		try (Connection connection = DBUtil.getConnection();
 				PreparedStatement stmtSelect = connection.prepareStatement(SEARCH_LIST_SQL);
 				PreparedStatement stmtCount = connection.prepareStatement(COUNT_BY_NAME_SQL)) {
 			// Set parameters.
-			stmtSelect.setString(1, subject != null ? "%" + subject + "%" : "%%");
+			stmtSelect.setString(1, email != null ? "%" + email + "%" : "%%");
 			stmtSelect.setInt(2, size);
 			stmtSelect.setInt(3, page * size);
 			// Show SQL query.
@@ -176,7 +173,7 @@ public class MessagesRepository {
 			}
 
 			// Count records;
-			stmtCount.setString(1, subject != null ? "%" + subject + "%" : "%%");
+			stmtCount.setString(1, email != null ? "%" + email + "%" : "%%");
 			ResultSet rsCount = stmtCount.executeQuery();
 			int totalRecord = 0;
 			while (rsCount.next()) {

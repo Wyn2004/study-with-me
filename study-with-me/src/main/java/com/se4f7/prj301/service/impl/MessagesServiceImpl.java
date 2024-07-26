@@ -64,6 +64,6 @@ public class MessagesServiceImpl implements MessagesService {
 	public PaginationModel filter(String page, String size, String name) {
 		int pageNumber = StringUtil.parseInt("Page", page);
 		int sizeNumber = StringUtil.parseInt("Size", size);
-		return MessagesRepository.filterBySubject(pageNumber, sizeNumber, name);
+		return MessagesRepository.filterByEmail(pageNumber, sizeNumber, name);
 	}
 }
