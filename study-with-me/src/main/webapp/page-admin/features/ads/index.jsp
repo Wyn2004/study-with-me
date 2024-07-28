@@ -7,7 +7,7 @@
       <div class="row p-2">
         <div class="col-6">
           <div class="btn-group">
-            <button type="button" class="btn btn-primary btn-sm" onclick="swicthViewPosts(false)">
+            <button type="button" class="btn btn-primary btn-sm" onclick="swicthViewPosts(false, null)">
               <i class="fa fa-plus"></i> Create
             </button>
           </div>

@@ -233,6 +233,7 @@ $(document).ready(function() {
 			$('#WebSetting-table').css('display', 'none');
 			$('#WebSetting-form').css('display', 'block');
 			if (id == null) {
+				$('#inpWebSettingId').val(null);
 				$('#inpWebSettingType').val(null);
 				$('#inpWebSettingImage').val(null);
 				$('#inpWebSettingContent').val('').summernote('code', '');

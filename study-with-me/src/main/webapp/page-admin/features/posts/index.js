@@ -243,6 +243,7 @@ $(document).ready(function() {
 			$('#posts-table').css('display', 'none');
 			$('#posts-form').css('display', 'block');
 			if (id == null) {
+				$('#inpPostsId').val(null);
 				$('#inpPostsTitle').val(null);
 				$('#selPostsCategory').val(null);
 				$('#inpPostsBanner').val(null);
