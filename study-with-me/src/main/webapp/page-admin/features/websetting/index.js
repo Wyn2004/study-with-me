@@ -36,7 +36,6 @@ $(document).ready(function() {
 					appendHTML += '<tr>';
 					appendHTML += `<td>${record.id}</td>`;
 					appendHTML += `<td>${record.type}</td>`;
-					appendHTML += `<td>${record.content}</td>`;
 					appendHTML += `<td>${record.image}</td>`;
 					appendHTML +=
 						`<td>
@@ -45,13 +44,15 @@ $(document).ready(function() {
                             </span>
                         </td>`;
 					appendHTML += `<td>${record.createdBy}</td>`;
-					appendHTML += `<td>${record.createdDate}</td>`;
 					appendHTML += `<td>${record.updatedBy}</td>`;
 					appendHTML += `<td>${record.updatedDate}</td>`;
 
 					// Append action button Edit & Delete.
 					appendHTML +=
 						`<td class='text-right'>
+							<a class='btn btn-info btn-sm' href='${domain}/public/${record.image}'>
+								<i class='fas fa-ellipsis-h'></i>
+							</a>
                             <a class='btn btn-info btn-sm' onclick='swicthViewWebSetting(false, ${record.id})'>
                                 <i class='fas fa-pencil-alt'></i>
                             </a>
@@ -101,7 +102,7 @@ $(document).ready(function() {
 				})
 		}
 	}
-	
+
 	// Call API get WebSetting by id.
 	this.getWebSettingById = function(id) {
 		// Use Ajax call API get WebSetting by id (/assets/http.js).

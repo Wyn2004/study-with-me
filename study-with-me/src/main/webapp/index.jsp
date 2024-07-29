@@ -7,6 +7,6 @@
 <title>Study with me</title>
 </head>
 <body>
-Hello world
+<jsp:include page="/page-admin/features/login/index.jsp" />
 </body>
 </html>

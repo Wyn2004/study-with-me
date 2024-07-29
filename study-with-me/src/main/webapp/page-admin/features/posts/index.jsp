@@ -34,9 +34,8 @@
               <th>Status</th>
               <th>Create By</th>
               <th>Create Date</th>
-              <th>Updated By</th>
               <th>Updated Date</th>
-              <th style="width: 95px;">Actions</th>
+              <th style="width: 140px;">Actions</th>
             </tr>
           </thead>
           <tbody id="tblPosts">

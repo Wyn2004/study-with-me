@@ -46,12 +46,14 @@ $(document).ready(function() {
 					</td>`;
 					appendHTML += `<td>${record.createdBy}</td>`;
 					appendHTML += `<td>${record.createdDate}</td>`;
-					appendHTML += `<td>${record.updatedBy}</td>`;
 					appendHTML += `<td>${record.updatedDate}</td>`;
 
 					// Append action button Edit & Delete.
 					appendHTML +=
 						`<td class='text-right'>
+							<a class='btn btn-info btn-sm' href='${domain}/public/${record.banner}'>
+								<i class='fas fa-ellipsis-h'></i>
+							</a>
 							<a class='btn btn-info btn-sm' onclick='swicthViewPosts(false, ${record.id})'>
 								<i class='fas fa-pencil-alt'></i>
 							</a>
