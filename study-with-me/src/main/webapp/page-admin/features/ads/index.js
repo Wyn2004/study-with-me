@@ -51,13 +51,12 @@ $(document).ready(function() {
 					appendHTML += `<td>${record.position}</td>`;
 					appendHTML += `<td>${record.width}</td>`;
 					appendHTML += `<td>${record.height}</td>`;
-
 					appendHTML +=
 						`<td>
-                        <span class='badge ${record.status.toLocaleLowerCase() === 'active' ? 'bg-success' : 'bg-danger'}'>
-                            ${record.status}
-                        </span>
-                    </td>`;
+            <span class='badge ${record.status.toLowerCase() === 'active' ? 'bg-success' : 'bg-danger'}'>
+                ${record.status}
+            </span>
+        </td>`;
 					appendHTML += `<td>${record.url}</td>`;
 
 					// Kiểm tra xem images có phải là null hoặc trống không
@@ -66,23 +65,23 @@ $(document).ready(function() {
 					appendHTML += `<td>${imagesHTML}</td>`;
 					appendHTML += `<td>${record.updatedDate}</td>`;
 
-
 					// Append action button Edit & Delete.
 					appendHTML +=
 						`<td class='text-right'>
-    						<a class='btn btn-info btn-sm' href='#' 
-    							onclick='showImages([${imageLists.map(img => `"${domain}/public/${img.trim()}"`).join(', ')}])'>
-        						<i class="fas fa-image"></i>
-    						</a>
-    						<a class='btn btn-info btn-sm' onclick='swicthViewPosts(false, ${record.id})'>
-       							 <i class='fas fa-pencil-alt'></i>
-   							</a>
-    						<a class='btn btn-danger btn-sm' onclick='deletePosts(${record.id})'>
-        						<i class='fas fa-trash'></i>
-    						</a>
-						</td>`;
+            <a class='btn btn-info btn-sm' href='#' 
+                onclick='showImages([${imageLists.map(img => `"${domain}/public/${img.trim()}"`).join(', ')}])'>
+                <i class="fas fa-image"></i>
+            </a>
+            <a class='btn btn-info btn-sm' onclick='swicthViewPosts(false, ${record.id})'>
+                <i class='fas fa-pencil-alt'></i>
+            </a>
+            <a class='btn btn-danger btn-sm' onclick='deletePosts(${record.id})'>
+                <i class='fas fa-trash'></i>
+            </a>
+        </td>`;
 					appendHTML += '</tr>';
 				}
+
 				// Build pagination with twbsPagination.
 				// More detail: https://josecebe.github.io/twbs-pagination/
 				$pagination.twbsPagination($.extend({}, defaultOpts, {
@@ -108,7 +107,7 @@ $(document).ready(function() {
 		// Show up popup
 		if (confirm("Are you sure you want to delete this advertisement?")) {
 			// If confirm then delete ads
-			Http.delete(`${domain} / admin / api / ads ? id = ${id}`)
+			Http.delete(`${domain}/admin/api/ads?id=${id}`)
 				.then(res => {
 					if (res.success) {
 						this.swicthViewPosts(true);
@@ -128,7 +127,7 @@ $(document).ready(function() {
 	// Call API get posts by id.
 	this.getPostsById = function(id) {
 		// Use Ajax call API get posts by id (/assets/http.js).
-		Http.get(`${domain} / admin / api / ads ? type = getOne & id=${id}`)
+		Http.get(`${domain}/admin/api/ads?type=getOne&id=${id}`)
 			.then(res => {
 				if (res.success) {
 					// Set value from response on update form.
@@ -174,7 +173,7 @@ $(document).ready(function() {
 		// Append payload
 		formData.append('payload', JSON.stringify(payload));
 
-		const url = currentId ? `${domain} / admin / api / ads ? id = ${currentId}` : `${domain} / admin / api / ads`;
+		const url = currentId?`${domain}/admin/api/ads?id=${currentId}`:`${domain}/admin/api/ads`;
 		const method = currentId ? Http.putFormData : Http.postFormData;
 
 		method(url, formData)
@@ -204,7 +203,7 @@ $(document).ready(function() {
 			theme: 'bootstrap4',
 			// Call api search category with select2.
 			ajax: {
-				url: `${domain} / admin / api / category`,
+				url: `${domain}/admin/api/category`,
 				headers: {
 					// Get token from localStore and append on API.
 					// Read more function: /assets/http.js
